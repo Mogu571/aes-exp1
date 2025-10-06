@@ -45,7 +45,7 @@
             font-size: 60px; 
             text-align: center; 
             font-weight: bold;
-            color: #000000;  
+            color: #000000;  /* 黑色 */
             display: flex;
             align-items: center;
             justify-content: center;
@@ -53,19 +53,19 @@
             width: 100%;
         }
         
-        /* 图片试次的完整容器居中 */
+        /* 图片容器居中 */
         .jspsych-image-keyboard-response {
-            display: flex !important;
-            flex-direction: column !important;
-            justify-content: center !important;
-            align-items: center !important;
-            width: 100% !important;
-            min-height: 500px !important;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            width: 100% ;
+            min-height: 500px ;
         }
         
-        /* 图片本身居中 */
+        /* 图片居中 */
         .jspsych-image-keyboard-response-stimulus {
-            display: block !important;
+            display: block ;
             margin: 0 auto !important;
             text-align: center !important;
         }
@@ -75,15 +75,15 @@
             margin: 0 auto !important;
         }
         
-        /* 评分控制杆样式 */
+        /* 评分杆 */
         .rating-slider { 
             position: relative; 
             width: 800px; 
             height: 10px; 
             margin: 40px auto; 
             border-radius: 5px;
-            background: #ffffff;
-            border: 2px solid #dee2e6; 
+            background-color: #ffffff;  /* 白色底 */
+            border: 2px solid #dee2e6;  /* 添加边框 */
             box-shadow: 0 2px 8px rgba(0,0,0,0.1);
         }
         
@@ -120,10 +120,18 @@
             margin: 0 auto; 
             font-size: 16px;
             font-weight: 500;
-            color: #ffffff;
+            color: #ffffff; 
         }
         
-        /* 确定按钮样式 - 使用之前的设计 */
+        /* 评分标题样式 */
+        .rating-prompt {
+            color: #ffffff; 
+            font-size: 20px;
+            font-weight: 500;
+            margin-bottom: 30px;
+        }
+        
+        /* 确定按钮样式 */
         .confirm-button { 
             width: 160px; 
             height: 50px; 
