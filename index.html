@@ -2,25 +2,106 @@
 <html lang="zh-CN">
 <head>
     <meta charset="UTF-8">
-    <title>图片美学评价实验（线上版）</title>
-    <!-- 加载jsPsych核心库 -->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>图片美学评价实验</title>
+
+    <!-- 引入jsPsych-->
     <script src="https://unpkg.com/jspsych@7.3.4/dist/jspsych.umd.min.js"></script>
-    <!-- 加载jsPsych插件 -->
     <script src="https://unpkg.com/jspsych@7.3.4/dist/plugins/jspsych-html-keyboard-response.js"></script>
     <script src="https://unpkg.com/jspsych@7.3.4/dist/plugins/jspsych-image-keyboard-response.js"></script>
-    <!-- 加载数据下载工具库 -->
     <script src="https://cdn.jsdelivr.net/npm/file-saver@2.0.5/dist/FileSaver.min.js"></script>
-    <!-- 基础样式 -->
+
+    <!-- CSS -->
     <style>
-        body { font-family: "SimSun", serif; font-size: 20px; background-color: #626262; }
-        .jspsych-display-element { max-width: 1920px; margin: 0 auto; }
-        /* 评分控制杆 */
-        .rating-slider { position: relative; width: 1120px; height: 50px; margin: 50px auto; border: 5px solid #000; }
-        .slider-marker { position: absolute; top: -25px; width: 6px; height: 50px; background-color: #000; transform: translateX(-50%); }
-        .rating-labels { display: flex; justify-content: space-between; width: 1120px; margin: 0 auto; }
-        .confirm-button { width: 120px; height: 100px; margin: 50px auto; border: 5px solid #000; text-align: center; line-height: 100px; cursor: pointer; }
-        .fixation-point { font-size: 50px; text-align: center; margin-top: 200px; color: #000; }
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { 
+            font-family: "SimSun", "Microsoft YaHei", serif; 
+            font-size: 20px; 
+            background-color: #626262; 
+            color: #000000; 
+        }
+        /* jsPsych容器：居中显示，限制最大宽度 */
+        .jspsych-display-element { 
+            max-width: 1920px; 
+            margin: 0 auto; 
+            padding: 20px;
+        }
+        /* 注视点样式（十字） */
+        .fixation-point { 
+            font-size: 50px; 
+            text-align: center; 
+            margin-top: 200px; 
+            font-weight: bold;
+        }
+        /* 评分控制杆样式 */
+        .rating-slider { 
+            position: relative; 
+            width: 1120px; 
+            height: 50px; 
+            margin: 50px auto; 
+            border: 5px solid #000; 
+            background-color: #fff; 
+        }
+        .slider-marker { 
+            position: absolute; 
+            top: -25px; 
+            width: 6px; 
+            height: 50px; 
+            background-color: #ff4444; 
+            transform: translateX(-50%); 
+            cursor: pointer;
+        }
+        /* 评分标签样式 */
+        .rating-labels { 
+            display: flex; 
+            justify-content: space-between; 
+            width: 1120px; 
+            margin: 0 auto; 
+            font-size: 22px;
+            font-weight: 500;
+        }
+        /* 确定按钮样式 */
+        .confirm-button { 
+            width: 120px; 
+            height: 100px; 
+            margin: 50px auto; 
+            border: 5px solid #000; 
+            text-align: center; 
+            line-height: 100px; 
+            cursor: pointer; 
+            background-color: #fff;
+            font-size: 22px;
+            transition: background-color 0.3s; 
+        }
+        .confirm-button:hover { 
+            background-color: #dddddd; 
+        }
+        /* 输入框 */
+        #subject-name { 
+            font-size: 24px; 
+            padding: 10px 15px; 
+            width: 350px; 
+            margin-top: 20px; 
+            border: 3px solid #000;
+            border-radius: 4px;
+        }
+        /* 指导语 */
+        .instruction-text { 
+            line-height: 1.8; 
+            margin: 30px auto; 
+            max-width: 1200px; 
+            font-size: 21px;
+        }
     </style>
 </head>
-<body></body>
-<script>
+<body>
+    <!-- 实验容器 -->
+    <div class="jspsych-display-element"></div>
+
+    <!-- 引用JS文件 -->
+    <script src="js/01_config.js"></script>
+    <script src="js/02_customPlugin.js"></script>
+    <script src="js/03_timeline.js"></script>
+    <script src="js/04_main.js"></script>
+</body>
+</html>
