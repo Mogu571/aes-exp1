@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <title>图片美学评价实验（线上版）</title>
+    <!-- 加载jsPsych核心库 -->
+    <script src="https://unpkg.com/jspsych@7.3.4/dist/jspsych.umd.min.js"></script>
+    <!-- 加载jsPsych插件 -->
+    <script src="https://unpkg.com/jspsych@7.3.4/dist/plugins/jspsych-html-keyboard-response.js"></script>
+    <script src="https://unpkg.com/jspsych@7.3.4/dist/plugins/jspsych-image-keyboard-response.js"></script>
+    <!-- 加载数据下载工具库 -->
+    <script src="https://cdn.jsdelivr.net/npm/file-saver@2.0.5/dist/FileSaver.min.js"></script>
+    <!-- 基础样式 -->
+    <style>
+        body { font-family: "SimSun", serif; font-size: 20px; background-color: #626262; }
+        .jspsych-display-element { max-width: 1920px; margin: 0 auto; }
+        /* 评分控制杆 */
+        .rating-slider { position: relative; width: 1120px; height: 50px; margin: 50px auto; border: 5px solid #000; }
+        .slider-marker { position: absolute; top: -25px; width: 6px; height: 50px; background-color: #000; transform: translateX(-50%); }
+        .rating-labels { display: flex; justify-content: space-between; width: 1120px; margin: 0 auto; }
+        .confirm-button { width: 120px; height: 100px; margin: 50px auto; border: 5px solid #000; text-align: center; line-height: 100px; cursor: pointer; }
+        .fixation-point { font-size: 50px; text-align: center; margin-top: 200px; color: #000; }
+    </style>
+</head>
+<body></body>
+<script>
