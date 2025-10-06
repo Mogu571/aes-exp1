@@ -1,7 +1,10 @@
 // -------------------------- 实验启动核心逻辑 --------------------------
+// ✅ 声明全局变量
+let jsPsych;
+
 document.addEventListener("DOMContentLoaded", () => {
-    // 初始化jsPsych配置
-    const jsPsych = initJsPsych({
+    // 初始化jsPsych配置并保存到全局变量
+    jsPsych = initJsPsych({
         on_finish: () => {
             console.log("实验完全结束！");
             console.log("被试姓名：", GLOBAL_DATA.subjectName);
@@ -12,7 +15,7 @@ document.addEventListener("DOMContentLoaded", () => {
     // 随机打乱图片呈现顺序
     IMAGE_LIST = jsPsych.randomization.shuffle(IMAGE_LIST);
 
-    // 构建实验时间线（确保所有插件已加载）
+    // 构建实验时间线
     const timeline = buildTimeline();
 
     // 运行实验
