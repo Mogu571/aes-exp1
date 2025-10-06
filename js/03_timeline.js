@@ -38,17 +38,15 @@ function buildTimeline() {
             <div class="instruction-container">
                 <h2 style="font-size: 28px;">实验指导语</h2>
                 <div class="instruction-text">
-                    <p>接下来您将看到一系列图片，请根据自身主观体验对每张图片进行 <strong>3项评价</strong>。</p>
+                    <p>接下来您将看到一系列图片，请根据自身主观体验对每张图片进行 <strong>评价</strong>。</p>
                     <p>评价没有对错之分，无需考虑"是否合适"，直接按真实感受选择即可。</p>
                     <p style="margin-top: 24px; font-weight: 600; color: #1f2937;">每张图片的呈现流程如下：</p>
                     <p>1. 首先会显示一个 <strong>"+"</strong> 字（注视点），请您注视它；</p>
                     <p>2. 随后显示空屏，短暂过渡后呈现图片；</p>
                     <p>3. 看到图片后，按 <kbd>空格键</kbd> 开始评价；</p>
                     <p>4. 评价时，拖动控制杆到对应位置，点击 <strong>"确定"</strong> 完成当前项评价。</p>
-                    <p style="margin-top: 24px; font-weight: 600; color: #1f2937;">评价维度包括：</p>
-                    <p>① <strong>美观度</strong>：从"非常丑"到"非常美"；</p>
-                    <p>② <strong>愉悦度</strong>：从"很不愉悦"到"非常愉悦"；</p>
-                    <p>③ <strong>喜好度</strong>：从"很不喜欢"到"非常喜欢"。</p>
+                    <p style="margin-top: 24px; font-weight: 600; color: #1f2937;">评价维度为：</p>
+                    <p><strong>美观度</strong>：从"非常丑"到"非常美"；</p>
                     <p style="margin-top: 32px; font-size: 18px; color: #007cba; text-align: center;">按 <kbd>空格键</kbd> 开始实验</p>
                 </div>
             </div>
