@@ -122,6 +122,10 @@ function buildTimeline() {
             post_trial_gap: 300,
             on_finish: (data) => {
                 currentImage.beautyScore = data.rating;
+                // 记录本次试次的完整数据
+                GLOBAL_DATA.experimentLog.push(
+                    `${currentImage.imageId}\t${currentImage.imageType}\t${currentImage.beautyScore}\t${currentImage.imageViewTime}`
+                );
             }
         };
 
