@@ -48,37 +48,51 @@ class CustomRatingPlugin {
         let isDragging = false;
         let ratingValue = 0.5;
 
-        // 3. 鼠标事件监听：开始拖动
+        // 更新标记位置的函数
+        const updateMarkerPosition = (clientX) => {
+            const sliderRect = slider.getBoundingClientRect();
+            let markerX = clientX - sliderRect.left;
+            markerX = Math.max(0, Math.min(markerX, sliderRect.width));
+            ratingValue = markerX / sliderRect.width;
+            marker.style.left = `${markerX}px`;
+        };
+
+        // 3. 鼠标事件监听：开始拖动（按下标记）
         const handleMouseDown = (e) => {
             isDragging = true;
             e.preventDefault();
         };
 
-        // 4. 鼠标事件监听：拖动标记
+        // 4. 鼠标事件监听：拖动标记（移动鼠标）
         const handleMouseMove = (e) => {
             if (isDragging) {
-                const sliderRect = slider.getBoundingClientRect();
-                let markerX = e.clientX - sliderRect.left;
-                markerX = Math.max(0, Math.min(markerX, sliderRect.width));
-                ratingValue = markerX / sliderRect.width;
-                marker.style.left = `${markerX}px`;
+                updateMarkerPosition(e.clientX);
             }
         };
 
-        // 5. 鼠标事件监听：停止拖动
+        // 5. 鼠标事件监听：停止拖动（松开鼠标）
         const handleMouseUp = () => {
             if (isDragging) isDragging = false;
         };
 
+        // 6. 点击滑动条移动标记
+        const handleSliderClick = (e) => {
+            if (e.target === slider) {  // 确保点击的是滑动条而不是标记
+                updateMarkerPosition(e.clientX);
+            }
+        };
+
         // 添加事件监听
         marker.addEventListener("mousedown", handleMouseDown);
+        slider.addEventListener("click", handleSliderClick);  // 点击滑动条
         document.addEventListener("mousemove", handleMouseMove);
         document.addEventListener("mouseup", handleMouseUp);
 
-        // 6. 点击确定按钮：结束评分，返回数据
+        // 7. 点击确定按钮：结束评分，返回数据
         confirmBtn.addEventListener("click", () => {
             // 清理事件监听
             marker.removeEventListener("mousedown", handleMouseDown);
+            slider.removeEventListener("click", handleSliderClick);
             document.removeEventListener("mousemove", handleMouseMove);
             document.removeEventListener("mouseup", handleMouseUp);
             
