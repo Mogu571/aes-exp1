@@ -96,6 +96,25 @@ timeline.push(instructionTrial);
             stimulus_height: 500,
             stimulus_width: 800,
             post_trial_gap: 0,
+            on_load: () => {
+                // 禁用键盘 3 秒
+                let keyboardEnabled = false;
+        
+                // 3秒后启用键盘
+                 setTimeout(() => {
+                    keyboardEnabled = true;
+                 }, 3000);
+        
+                // 拦截按键事件
+                const handleKeydown = (e) => {
+                    if (!keyboardEnabled && e.key === ' ') {
+                        e.preventDefault();
+                        e.stopPropagation();
+                    }
+                };
+        
+                document.addEventListener('keydown', handleKeydown, true);
+            },
             on_finish: (data) => {
                 currentImage.imageViewTime = data.rt;
             }
