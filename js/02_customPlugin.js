@@ -6,15 +6,15 @@ class CustomRatingPlugin {
         name: "custom-rating",
         parameters: {
             labelLeft: { 
-                type: jsPsych.ParameterType.STRING, 
+                type: 'string',  // ✅ 改为小写字符串
                 default: "非常差" // 评分左标签（如"非常丑"）
             },
             labelRight: { 
-                type: jsPsych.ParameterType.STRING, 
+                type: 'string',  // ✅ 改为小写字符串
                 default: "非常好" // 评分右标签（如"非常美"）
             },
             prompt: { 
-                type: jsPsych.ParameterType.STRING, 
+                type: 'string',  // ✅ 改为小写字符串
                 default: "请评价" // 提示文本（如"请评价美观度"）
             }
         }
