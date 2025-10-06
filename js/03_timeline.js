@@ -91,32 +91,25 @@ function buildTimeline() {
         const imageTrial = {
             type: jsPsychImageKeyboardResponse,
             stimulus: currentImage.imageUrl,
-            choices: [" "],
+            choices: "NO_KEYS",  // 初始禁用所有按键
+            prompt: `<div id="image-prompt" style="text-align: center; margin-top: 20px; color: #ffffff; font-size: 16px; visibility: hidden;">按 <kbd style="background: #ffffff; color: #333;">空格键</kbd> 开始评价</div>`,
+            stimulus_height: 500,
+            stimulus_width: 800,
+            trial_duration: 3000,  // 3秒后自动结束此试次
+            post_trial_gap: 0
+        };
+
+        // 3秒后：显示提示并允许按键
+        const imageWaitTrial = {
+            type: jsPsychImageKeyboardResponse,
+            stimulus: currentImage.imageUrl,
+            choices: [" "],  // 允许按空格
             prompt: `<div style="text-align: center; margin-top: 20px; color: #ffffff; font-size: 16px;">按 <kbd style="background: #ffffff; color: #333;">空格键</kbd> 开始评价</div>`,
             stimulus_height: 500,
             stimulus_width: 800,
             post_trial_gap: 0,
-            on_load: () => {
-                // 禁用键盘 3 秒
-                let keyboardEnabled = false;
-        
-                // 3秒后启用键盘
-                 setTimeout(() => {
-                    keyboardEnabled = true;
-                 }, 3000);
-        
-                // 拦截按键事件
-                const handleKeydown = (e) => {
-                    if (!keyboardEnabled && e.key === ' ') {
-                        e.preventDefault();
-                        e.stopPropagation();
-                    }
-                };
-        
-                document.addEventListener('keydown', handleKeydown, true);
-            },
             on_finish: (data) => {
-                currentImage.imageViewTime = data.rt;
+                currentImage.imageViewTime = data.rt + 3000;  // 总时长 = 3秒 + 反应时
             }
         };
 
@@ -159,8 +152,8 @@ function buildTimeline() {
             }
         }; */
 
-        // 将当前试次的4个子环节加入时间线
-        timeline.push(fixationTrial, blankTrial, imageTrial, beautyRatingTrial);
+        // 将当前试次的5个子环节加入时间线
+        timeline.push(fixationTrial, blankTrial, imageTrial, imageWaitTrial, beautyRatingTrial);
     }
 
     // -------------------------- 环节4：实验结束页（数据下载） --------------------------
