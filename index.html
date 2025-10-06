@@ -4,98 +4,210 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>图片美学评价实验</title>
-
     <!-- 引入jsPsych-->
     <script src="https://unpkg.com/jspsych@8.2.1"></script>
     <script src="https://unpkg.com/@jspsych/plugin-html-keyboard-response@2.1.0"></script>
     <script src="https://unpkg.com/@jspsych/plugin-image-keyboard-response@2.1.0"></script>
     <script src="https://cdn.jsdelivr.net/npm/file-saver@2.0.5/dist/FileSaver.min.js"></script>
-
     <!-- CSS -->
     <style>
-        * { margin: 0; padding: 0; box-sizing: border-box; }
+        * { 
+            margin: 0; 
+            padding: 0; 
+            box-sizing: border-box; 
+        }
+        
         body { 
-            font-family: "SimSun", "Microsoft YaHei", serif; 
-            font-size: 20px; 
-            background-color: #626262; 
-            color: #000000; 
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Microsoft YaHei", "SimSun", sans-serif;
+            font-size: 18px; 
+            background-color: #ffffff; /* 改为白色 */
+            color: #333333;
+            line-height: 1.6;
         }
-        /* jsPsych容器：居中显示，限制最大宽度 */
+        
+        /* jsPsych容器 */
         #jspsych-content { 
-            max-width: 1920px; 
+            max-width: 1400px; 
             margin: 0 auto; 
-            padding: 20px;
+            padding: 40px 20px;
         }
-        /* 注视点样式（十字） */
+        
+        /* 注视点样式 - 居中显示 */
         .fixation-point { 
-            font-size: 50px; 
+            font-size: 60px; 
             text-align: center; 
-            margin-top: 200px; 
             font-weight: bold;
+            color: #000;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            min-height: 400px; /* 确保与图片高度一致 */
         }
+        
+        /* 图片容器 - 确保居中 */
+        .jspsych-image-keyboard-response-stimulus {
+            display: flex !important;
+            justify-content: center !important;
+            align-items: center !important;
+            min-height: 500px !important;
+        }
+        
         /* 评分控制杆样式 */
         .rating-slider { 
             position: relative; 
-            width: 1120px; 
-            height: 50px; 
-            margin: 50px auto; 
-            border: 5px solid #000; 
-            background-color: #fff; 
+            width: 800px; 
+            height: 12px; 
+            margin: 40px auto; 
+            border-radius: 6px;
+            background: linear-gradient(to right, #ef4444, #3b82f6);
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
         }
+        
         .slider-marker { 
             position: absolute; 
-            top: -25px; 
-            width: 6px; 
-            height: 50px; 
-            background-color: #ff4444; 
-            transform: translateX(-50%); 
-            cursor: pointer;
+            top: -8px; 
+            width: 28px; 
+            height: 28px; 
+            background-color: #ffffff;
+            border: 3px solid #1e40af;
+            border-radius: 50%;
+            transform: translateX(-50%);
+            cursor: grab;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.2);
+            transition: all 0.2s ease;
         }
+        
+        .slider-marker:hover {
+            transform: translateX(-50%) scale(1.15);
+            box-shadow: 0 4px 12px rgba(0,0,0,0.3);
+        }
+        
+        .slider-marker:active {
+            cursor: grabbing;
+            transform: translateX(-50%) scale(1.1);
+        }
+        
         /* 评分标签样式 */
         .rating-labels { 
             display: flex; 
             justify-content: space-between; 
-            width: 1120px; 
+            width: 800px; 
             margin: 0 auto; 
-            font-size: 22px;
+            font-size: 16px;
             font-weight: 500;
+            color: #666;
         }
+        
         /* 确定按钮样式 */
         .confirm-button { 
-            width: 120px; 
-            height: 100px; 
+            width: 160px; 
+            height: 50px; 
             margin: 50px auto; 
-            border: 5px solid #000; 
+            border: none;
+            border-radius: 8px;
             text-align: center; 
-            line-height: 100px; 
+            line-height: 50px; 
             cursor: pointer; 
-            background-color: #fff;
-            font-size: 22px;
-            transition: background-color 0.3s; 
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: #ffffff;
+            font-size: 18px;
+            font-weight: 600;
+            box-shadow: 0 4px 15px rgba(102, 126, 234, 0.4);
+            transition: all 0.3s ease;
         }
+        
         .confirm-button:hover { 
-            background-color: #dddddd; 
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(102, 126, 234, 0.6);
         }
-        /* 输入框 */
+        
+        .confirm-button:active {
+            transform: translateY(0);
+        }
+        
+        /* 输入框样式 */
         #subject-name { 
-            font-size: 24px; 
-            padding: 10px 15px; 
-            width: 350px; 
+            font-size: 18px; 
+            padding: 12px 20px; 
+            width: 320px; 
             margin-top: 20px; 
-            border: 3px solid #000;
-            border-radius: 4px;
+            border: 2px solid #e5e7eb;
+            border-radius: 8px;
+            transition: all 0.3s ease;
+            outline: none;
         }
-        /* 指导语 */
+        
+        #subject-name:focus {
+            border-color: #667eea;
+            box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1);
+        }
+        
+        /* 指导语样式 */
         .instruction-text { 
             line-height: 1.8; 
             margin: 30px auto; 
-            max-width: 1200px; 
-            font-size: 21px;
+            max-width: 900px; 
+            font-size: 17px;
+            color: #4b5563;
+        }
+        
+        .instruction-text p {
+            margin-bottom: 12px;
+        }
+        
+        /* 标题样式 */
+        h2 {
+            color: #1f2937;
+            font-weight: 600;
+            margin-bottom: 24px;
+        }
+        
+        /* 下载按钮样式 */
+        #js-download-btn {
+            font-size: 18px; 
+            padding: 14px 40px; 
+            border: none;
+            border-radius: 8px;
+            background: linear-gradient(135deg, #10b981 0%, #059669 100%);
+            color: #ffffff;
+            cursor: pointer; 
+            font-weight: 600;
+            box-shadow: 0 4px 15px rgba(16, 185, 129, 0.4);
+            transition: all 0.3s ease;
+        }
+        
+        #js-download-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(16, 185, 129, 0.6);
+        }
+        
+        #js-download-btn:active {
+            transform: translateY(0);
+        }
+        
+        /* 提示文本样式 */
+        .jspsych-image-keyboard-response-prompt {
+            margin-top: 20px;
+            font-size: 16px;
+            color: #6b7280;
+            font-weight: 500;
+        }
+        
+        /* 空格提示的美化 */
+        kbd {
+            display: inline-block;
+            padding: 3px 8px;
+            font-size: 14px;
+            line-height: 1.4;
+            color: #333;
+            background-color: #f3f4f6;
+            border: 1px solid #d1d5db;
+            border-radius: 4px;
+            box-shadow: 0 1px 2px rgba(0,0,0,0.1);
         }
     </style>
 </head>
 <body>
-
     <!-- 引用JS文件 -->
     <script src="js/01_config.js"></script>
     <script src="js/02_customPlugin.js"></script>
