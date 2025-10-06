@@ -33,20 +33,20 @@ function buildTimeline() {
 
     // -------------------------- 环节2：实验指导语 --------------------------
     const instructionTrial = {
-    type: jsPsychHtmlKeyboardResponse,
-    stimulus: `
-        <div style="text-align: center; margin-top: 60px;">
-            <img src="instruction.png" style="max-width: 900px; width: 100%; height: auto; border-radius: 15px; box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);">
-            <p style="margin-top: 32px; font-size: 18px; color: #007cba;">按 <kbd>空格键</kbd> 开始实验</p>
-        </div>
-    `,
-    choices: [" "],
-    post_trial_gap: 500,
-    on_load: () => {
-        document.body.style.backgroundColor = "#f8f9fa"; // 白色背景
-    }
-};
-timeline.push(instructionTrial);
+        type: jsPsychHtmlKeyboardResponse,
+        stimulus: `
+            <div style="text-align: center; margin-top: 60px;">
+                <img src="instruction.png" style="max-width: 900px; width: 100%; height: auto; border-radius: 15px; box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);">
+                <p style="margin-top: 32px; font-size: 18px; color: #007cba;">按 <kbd>空格键</kbd> 开始实验</p>
+            </div>
+        `,
+        choices: [" "],
+        post_trial_gap: 500,
+        on_load: () => {
+             document.body.style.backgroundColor = "#f8f9fa"; // 白色背景
+        }
+    };
+    timeline.push(instructionTrial);
 
     // ✅ 添加过渡试次，切换到实验背景色
     const startExperimentTransition = {
