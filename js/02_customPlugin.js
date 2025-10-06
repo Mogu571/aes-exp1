@@ -1,6 +1,7 @@
 // -------------------------- 自定义评分插件：custom-rating --------------------------
 // 功能：提供"左标签-控制杆-右标签"的评分界面,支持鼠标拖动标记
 class CustomRatingPlugin {
+    // 插件参数定义（外部调用时需传入的参数）
     static info = {
         name: "custom-rating",
         parameters: {
@@ -24,10 +25,10 @@ class CustomRatingPlugin {
     }
 
     trial(display_element, trial) {
-        // 1. 构建评分界面HTML
+        // 1. 构建评分界面HTML - 使用CSS类
         const ratingHtml = `
-            <div style="text-align: center; margin-top: 50px; color: ${EXPERIMENT_CONFIG.textColor};">
-                <h2 style="margin-bottom: 30px;">${trial.prompt}</h2>
+            <div style="text-align: center; margin-top: 50px;">
+                <h2 class="rating-prompt">${trial.prompt}</h2>
                 <div class="rating-slider" id="js-rating-slider">
                     <div class="slider-marker" id="js-slider-marker" style="left: 50%;"></div>
                 </div>
@@ -84,7 +85,7 @@ class CustomRatingPlugin {
             // 清空当前界面
             display_element.innerHTML = "";
             
-            // ✅ 使用全局 jsPsych 变量（最可靠的方法）
+            // 使用全局 jsPsych 变量
             jsPsych.finishTrial({
                 rating: parseFloat(ratingValue.toFixed(4))
             });
