@@ -33,31 +33,20 @@ function buildTimeline() {
 
     // -------------------------- 环节2：实验指导语 --------------------------
     const instructionTrial = {
-        type: jsPsychHtmlKeyboardResponse,
-        stimulus: `
-            <div class="instruction-container">
-                <h2 style="font-size: 28px;">实验指导语</h2>
-                <div class="instruction-text">
-                    <p>接下来您将看到一系列图片，请根据自身主观体验对每张图片进行 <strong>评价</strong>。</p>
-                    <p>评价没有对错之分，无需考虑"是否合适"，直接按真实感受选择即可。</p>
-                    <p style="margin-top: 24px; font-weight: 600; color: #1f2937;">每张图片的呈现流程如下：</p>
-                    <p>1. 首先会显示一个 <strong>"+"</strong> 字（注视点），请您注视它；</p>
-                    <p>2. 随后显示空屏，短暂过渡后呈现图片；</p>
-                    <p>3. 看到图片后，按 <kbd>空格键</kbd> 开始评价；</p>
-                    <p>4. 评价时，拖动控制杆到对应位置，点击 <strong>"确定"</strong> 完成当前项评价。</p>
-                    <p style="margin-top: 24px; font-weight: 600; color: #1f2937;">评价维度为：</p>
-                    <p><strong>美观度</strong>：从"非常丑"到"非常美"；</p>
-                    <p style="margin-top: 32px; font-size: 18px; color: #007cba; text-align: center;">按 <kbd>空格键</kbd> 开始实验</p>
-                </div>
-            </div>
-        `,
-        choices: [" "],
-        post_trial_gap: 500,
-        on_load: () => {
-            document.body.style.backgroundColor = "#f8f9fa"; // 白色背景
-        }
-    };
-    timeline.push(instructionTrial);
+    type: jsPsychHtmlKeyboardResponse,
+    stimulus: `
+        <div style="text-align: center; margin-top: 60px;">
+            <img src="instruction.png" style="max-width: 900px; width: 100%; height: auto; border-radius: 15px; box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);">
+            <p style="margin-top: 32px; font-size: 18px; color: #007cba;">按 <kbd>空格键</kbd> 开始实验</p>
+        </div>
+    `,
+    choices: [" "],
+    post_trial_gap: 500,
+    on_load: () => {
+        document.body.style.backgroundColor = "#f8f9fa"; // 白色背景
+    }
+};
+timeline.push(instructionTrial);
 
     // ✅ 添加过渡试次，切换到实验背景色
     const startExperimentTransition = {
@@ -71,7 +60,7 @@ function buildTimeline() {
         choices: "NO_KEYS",
         trial_duration: 1500,
         on_load: () => {
-            document.body.style.backgroundColor = "#626262"; // ✅ 切换到灰色背景
+            document.body.style.backgroundColor = "#626262"; //
         }
     };
     timeline.push(startExperimentTransition);
