@@ -177,7 +177,7 @@ function buildTimeline() {
                     const dataText = GLOBAL_DATA.experimentLog.join("\n");
                     const blob = new Blob([dataText], { type: "text/plain; charset=utf-8" });
                     const timestamp = new Date().toLocaleString().replace(/[:/ ]/g, "-");
-                    const fileName = `${GLOBAL_DATA.subjectName}_实验数据_${timestamp}.txt`;
+                    const fileName = `${GLOBAL_DATA.subjectName}_实验数据_2_${timestamp}.txt`;
                     saveAs(blob, fileName);
                 });
             }, 100);
