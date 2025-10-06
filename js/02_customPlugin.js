@@ -20,13 +20,14 @@ class CustomRatingPlugin {
         }
     };
 
-    // ✅ 添加构造函数，接收 jsPsych 实例
     constructor(jsPsych) {
         this.jsPsych = jsPsych;
     }
 
-    // 插件核心逻辑（实验试次执行时的代码）
     trial(display_element, trial) {
+        // ✅ 关键修复：在方法开始时保存 jsPsych 引用
+        const jsPsych = this.jsPsych;
+        
         // 1. 构建评分界面HTML
         const ratingHtml = `
             <div style="text-align: center; margin-top: 50px; color: ${EXPERIMENT_CONFIG.textColor};">
@@ -87,8 +88,8 @@ class CustomRatingPlugin {
             // 清空当前界面
             display_element.innerHTML = "";
             
-            // ✅ 现在 this.jsPsych 已经正确初始化了
-            this.jsPsych.finishTrial({
+            // ✅ 使用保存的 jsPsych 引用
+            jsPsych.finishTrial({
                 rating: parseFloat(ratingValue.toFixed(4))
             });
         });
