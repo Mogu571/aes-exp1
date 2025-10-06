@@ -1,29 +1,27 @@
 // -------------------------- 自定义评分插件：custom-rating --------------------------
-// 功能：提供“左标签-控制杆-右标签”的评分界面，支持鼠标拖动标记
-jsPsych.plugins["custom-rating"] = (function() {
-    const plugin = {};
-
+// 功能：提供"左标签-控制杆-右标签"的评分界面,支持鼠标拖动标记
+class CustomRatingPlugin {
     // 插件参数定义（外部调用时需传入的参数）
-    plugin.info = {
+    static info = {
         name: "custom-rating",
         parameters: {
             labelLeft: { 
-                type: jsPsych.plugins.parameterType.STRING, 
-                default: "非常差" // 评分左标签（如“非常丑”）
+                type: jsPsych.ParameterType.STRING, 
+                default: "非常差" // 评分左标签（如"非常丑"）
             },
             labelRight: { 
-                type: jsPsych.plugins.parameterType.STRING, 
-                default: "非常好" // 评分右标签（如“非常美”）
+                type: jsPsych.ParameterType.STRING, 
+                default: "非常好" // 评分右标签（如"非常美"）
             },
             prompt: { 
-                type: jsPsych.plugins.parameterType.STRING, 
-                default: "请评价" // 提示文本（如“请评价美观度”）
+                type: jsPsych.ParameterType.STRING, 
+                default: "请评价" // 提示文本（如"请评价美观度"）
             }
         }
     };
 
     // 插件核心逻辑（实验试次执行时的代码）
-    plugin.trial = function(displayElement, trial) {
+    trial(display_element, trial) {
         // 1. 构建评分界面HTML（插入到jsPsych容器中）
         const ratingHtml = `
             <div style="text-align: center; margin-top: 50px; color: ${EXPERIMENT_CONFIG.textColor};">
@@ -42,7 +40,7 @@ jsPsych.plugins["custom-rating"] = (function() {
                 <div class="confirm-button" id="js-confirm-btn">确定</div>
             </div>
         `;
-        displayElement.innerHTML = ratingHtml;
+        display_element.innerHTML = ratingHtml;
 
         // 2. 初始化变量
         const slider = document.getElementById("js-rating-slider");
@@ -52,13 +50,13 @@ jsPsych.plugins["custom-rating"] = (function() {
         let ratingValue = 0.5;  // 初始评分（0-1，对应控制杆中间）
 
         // 3. 鼠标事件监听：开始拖动（按下标记）
-        marker.addEventListener("mousedown", (e) => {
+        const handleMouseDown = (e) => {
             isDragging = true;
             e.preventDefault(); // 阻止默认行为（如文本选中）
-        });
+        };
 
         // 4. 鼠标事件监听：拖动标记（移动鼠标）
-        document.addEventListener("mousemove", (e) => {
+        const handleMouseMove = (e) => {
             if (isDragging) {
                 // 获取控制杆的位置和尺寸
                 const sliderRect = slider.getBoundingClientRect();
@@ -70,26 +68,32 @@ jsPsych.plugins["custom-rating"] = (function() {
                 // 更新标记位置
                 marker.style.left = `${markerX}px`;
             }
-        });
+        };
 
         // 5. 鼠标事件监听：停止拖动（松开鼠标）
-        document.addEventListener("mouseup", () => {
+        const handleMouseUp = () => {
             if (isDragging) isDragging = false;
-        });
+        };
+
+        // 添加事件监听
+        marker.addEventListener("mousedown", handleMouseDown);
+        document.addEventListener("mousemove", handleMouseMove);
+        document.addEventListener("mouseup", handleMouseUp);
 
         // 6. 点击确定按钮：结束评分，返回数据
         confirmBtn.addEventListener("click", () => {
             // 清理事件监听（避免内存泄漏）
-            document.removeEventListener("mousemove", () => {});
-            document.removeEventListener("mouseup", () => {});
+            marker.removeEventListener("mousedown", handleMouseDown);
+            document.removeEventListener("mousemove", handleMouseMove);
+            document.removeEventListener("mouseup", handleMouseUp);
+            
             // 清空当前界面
-            displayElement.innerHTML = "";
+            display_element.innerHTML = "";
+            
             // 返回评分结果（保留4位小数，供后续存储）
-            jsPsych.finishTrial({
+            this.jsPsych.finishTrial({
                 rating: parseFloat(ratingValue.toFixed(4))
             });
         });
-    };
-
-    return plugin;
-})();
+    }
+}
