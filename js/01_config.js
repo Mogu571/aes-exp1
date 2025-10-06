@@ -18,8 +18,6 @@ for (let i = 1; i <= EXPERIMENT_CONFIG.totalTrials; i++) {
         imageUrl: EXPERIMENT_CONFIG.imageFolder + i + ".png", // 图片完整相对路径
         imageViewTime: 0,                    // 图片观看时长（后续记录）
         beautyScore: 0,                      // 美观度评分（后续记录）
-        pleasureScore: 0,                    // 愉悦度评分（后续记录）
-        likeScore: 0                         // 喜好度评分（后续记录）
     });
 }
 
@@ -30,6 +28,6 @@ const GLOBAL_DATA = {
     subjectName: "",        // 被试姓名（录入后赋值）
     experimentLog: [        // 实验数据日志（最终导出为TXT）
         "被试姓名：待录入",
-        "图片序号\t图片类型\t美观度(0-1)\t愉悦度(0-1)\t喜好度(0-1)\t观看时长(ms)"
+        "图片序号\t图片类型\t美观度(0-1)\t观看时长(ms)"
     ]
 };
