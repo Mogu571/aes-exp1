@@ -9,8 +9,8 @@ function buildTimeline() {
         stimulus: `
             <div class="welcome-container">
                 <h2>欢迎参与实验！</h2>
-                <p style="margin-top: 50px; font-size: 18px;">请输入您的姓名：</p>
-                <input type="text" id="subject-name" placeholder="例如：张三">
+                <p style="margin-top: 50px; font-size: 18px;">请输入您的姓名（拼音）：</p>
+                <input type="text" id="subject-name" placeholder="例如：zhangsan">
                 <p style="margin-top: 30px; font-size: 16px; color: #6c757d;">输入完成后按 <kbd>空格键</kbd> 继续</p>
             </div>
         `,
@@ -85,7 +85,7 @@ function buildTimeline() {
         // 子环节1：注视点（1s）
         const fixationTrial = {
             type: jsPsychHtmlKeyboardResponse,
-            stimulus: `<div class="fixation-point" style="color: #ffffff;">+</div>`,
+            stimulus: `<div class="fixation-point">+</div>`,
             choices: "NO_KEYS",
             trial_duration: EXPERIMENT_CONFIG.fixationDuration,
             post_trial_gap: 0
