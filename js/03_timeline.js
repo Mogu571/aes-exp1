@@ -127,7 +127,7 @@ function buildTimeline() {
         };
 
         // 子环节5：维度2 - 愉悦度评分
-        const pleasureRatingTrial = {
+       /* const pleasureRatingTrial = {
             type: CustomRatingPlugin,
             labelLeft: "很不愉悦",
             labelRight: "非常愉悦",
@@ -136,10 +136,10 @@ function buildTimeline() {
             on_finish: (data) => {
                 currentImage.pleasureScore = data.rating;
             }
-        };
+        }; */
 
         // 子环节6：维度3 - 喜好度评分
-        const likeRatingTrial = {
+       /* const likeRatingTrial = {
             type: CustomRatingPlugin,
             labelLeft: "很不喜欢",
             labelRight: "非常喜欢",
@@ -151,10 +151,10 @@ function buildTimeline() {
                     `${currentImage.imageId}\t${currentImage.imageType}\t${currentImage.beautyScore}\t${currentImage.pleasureScore}\t${currentImage.likeScore}\t${currentImage.imageViewTime}`
                 );
             }
-        };
+        }; */
 
-        // 将当前试次的6个子环节加入时间线
-        timeline.push(fixationTrial, blankTrial, imageTrial, beautyRatingTrial, pleasureRatingTrial, likeRatingTrial);
+        // 将当前试次的4个子环节加入时间线
+        timeline.push(fixationTrial, blankTrial, imageTrial, beautyRatingTrial);
     }
 
     // -------------------------- 环节4：实验结束页（数据下载） --------------------------
