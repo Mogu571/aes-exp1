@@ -8,7 +8,7 @@ const EXPERIMENT_CONFIG = {
     textColor: "#000000"    // 文本色
 };
 
-// -------------------------- 生成“图片序号-类型”映射（复现MATLAB逻辑） --------------------------
+// -------------------------- 生成"图片序号-类型"映射（复现MATLAB逻辑） --------------------------
 // 规则：序号1-50=先验（type:1），51-100=随机（type:2）
 let IMAGE_LIST = [];
 for (let i = 1; i <= EXPERIMENT_CONFIG.totalTrials; i++) {
@@ -22,8 +22,8 @@ for (let i = 1; i <= EXPERIMENT_CONFIG.totalTrials; i++) {
         likeScore: 0                         // 喜好度评分（后续记录）
     });
 }
-// 随机打乱图片呈现顺序（复现MATLAB的randperm(100)）
-IMAGE_LIST = jsPsych.randomization.shuffle(IMAGE_LIST);
+
+// 注意：图片顺序将在 04_main.js 中初始化 jsPsych 后打乱
 
 // -------------------------- 全局数据存储（所有文件可修改） --------------------------
 const GLOBAL_DATA = {
