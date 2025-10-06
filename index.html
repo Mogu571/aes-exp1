@@ -53,19 +53,19 @@
             width: 100%;
         }
         
-        /* 图片容器居中 */
+        /* 图片试次的完整容器居中 */
         .jspsych-image-keyboard-response {
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-            width: 100% ;
-            min-height: 500px ;
+            display: flex !important;
+            flex-direction: column !important;
+            justify-content: center !important;
+            align-items: center !important;
+            width: 100% !important;
+            min-height: 500px !important;
         }
         
-        /* 图片居中 */
+        /* 图片本身居中 */
         .jspsych-image-keyboard-response-stimulus {
-            display: block ;
+            display: block !important;
             margin: 0 auto !important;
             text-align: center !important;
         }
@@ -75,7 +75,7 @@
             margin: 0 auto !important;
         }
         
-        /* 评分杆 */
+        /* 评分控制杆样式 */
         .rating-slider { 
             position: relative; 
             width: 800px; 
@@ -120,12 +120,12 @@
             margin: 0 auto; 
             font-size: 16px;
             font-weight: 500;
-            color: #ffffff; 
+            color: #ffffff;  /* 白色 */
         }
         
         /* 评分标题样式 */
         .rating-prompt {
-            color: #ffffff; 
+            color: #ffffff !important;  /* 白色 */
             font-size: 20px;
             font-weight: 500;
             margin-bottom: 30px;
