@@ -18,10 +18,10 @@
         }
         
         body { 
-            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Microsoft YaHei", "SimSun", sans-serif;
+            font-family: 'Microsoft YaHei', 'Helvetica Neue', Helvetica, Arial, sans-serif;
             font-size: 18px; 
-            background-color: #ffffff; /* 改为白色 */
-            color: #333333;
+            background-color: #f8f9fa;
+            color: #333;
             line-height: 1.6;
         }
         
@@ -30,6 +30,14 @@
             max-width: 1400px; 
             margin: 0 auto; 
             padding: 40px 20px;
+        }
+        
+        /* 强制所有jsPsych内容居中 */
+        .jspsych-content-wrapper {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            width: 100%;
         }
         
         /* 注视点样式 - 居中显示 */
@@ -41,50 +49,66 @@
             display: flex;
             align-items: center;
             justify-content: center;
-            min-height: 400px; /* 确保与图片高度一致 */
+            min-height: 500px;
+            width: 100%;
         }
         
-        /* 图片容器 - 确保居中 */
-        .jspsych-image-keyboard-response-stimulus {
+        /* 图片试次的完整容器居中 */
+        .jspsych-image-keyboard-response {
             display: flex !important;
+            flex-direction: column !important;
             justify-content: center !important;
             align-items: center !important;
+            width: 100% !important;
             min-height: 500px !important;
+        }
+        
+        /* 图片本身居中 */
+        .jspsych-image-keyboard-response-stimulus {
+            display: block !important;
+            margin: 0 auto !important;
+            text-align: center !important;
+        }
+        
+        .jspsych-image-keyboard-response img {
+            display: block !important;
+            margin: 0 auto !important;
         }
         
         /* 评分控制杆样式 */
         .rating-slider { 
             position: relative; 
             width: 800px; 
-            height: 12px; 
+            height: 10px; 
             margin: 40px auto; 
-            border-radius: 6px;
-            background: linear-gradient(to right, #ef4444, #3b82f6);
+            border-radius: 5px;
+            background: linear-gradient(to right, #dc3545, #28a745);
             box-shadow: 0 2px 8px rgba(0,0,0,0.1);
         }
         
         .slider-marker { 
             position: absolute; 
-            top: -8px; 
-            width: 28px; 
-            height: 28px; 
+            top: -10px; 
+            width: 30px; 
+            height: 30px; 
             background-color: #ffffff;
-            border: 3px solid #1e40af;
+            border: 3px solid #007cba;
             border-radius: 50%;
             transform: translateX(-50%);
             cursor: grab;
-            box-shadow: 0 2px 8px rgba(0,0,0,0.2);
+            box-shadow: 0 2px 10px rgba(0, 124, 186, 0.3);
             transition: all 0.2s ease;
         }
         
         .slider-marker:hover {
-            transform: translateX(-50%) scale(1.15);
-            box-shadow: 0 4px 12px rgba(0,0,0,0.3);
+            transform: translateX(-50%) scale(1.1);
+            box-shadow: 0 4px 15px rgba(0, 124, 186, 0.4);
         }
         
         .slider-marker:active {
             cursor: grabbing;
-            transform: translateX(-50%) scale(1.1);
+            transform: translateX(-50%) scale(1.05);
+            box-shadow: 0 2px 10px rgba(0, 124, 186, 0.3);
         }
         
         /* 评分标签样式 */
@@ -95,10 +119,10 @@
             margin: 0 auto; 
             font-size: 16px;
             font-weight: 500;
-            color: #666;
+            color: #495057;
         }
         
-        /* 确定按钮样式 */
+        /* 确定按钮样式 - 使用之前的设计 */
         .confirm-button { 
             width: 160px; 
             height: 50px; 
@@ -108,92 +132,114 @@
             text-align: center; 
             line-height: 50px; 
             cursor: pointer; 
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            background-color: #007cba;
             color: #ffffff;
-            font-size: 18px;
-            font-weight: 600;
-            box-shadow: 0 4px 15px rgba(102, 126, 234, 0.4);
+            font-size: 16px;
+            font-weight: 500;
+            box-shadow: 0 2px 10px rgba(0, 124, 186, 0.2);
             transition: all 0.3s ease;
         }
         
         .confirm-button:hover { 
+            background-color: #005a87;
             transform: translateY(-2px);
-            box-shadow: 0 6px 20px rgba(102, 126, 234, 0.6);
+            box-shadow: 0 4px 15px rgba(0, 124, 186, 0.3);
         }
         
         .confirm-button:active {
             transform: translateY(0);
+            box-shadow: 0 2px 10px rgba(0, 124, 186, 0.2);
         }
         
         /* 输入框样式 */
         #subject-name { 
-            font-size: 18px; 
-            padding: 12px 20px; 
+            font-size: 16px; 
+            padding: 10px 20px; 
             width: 320px; 
             margin-top: 20px; 
-            border: 2px solid #e5e7eb;
-            border-radius: 8px;
+            border: 2px solid #dee2e6;
+            border-radius: 6px;
             transition: all 0.3s ease;
             outline: none;
         }
         
         #subject-name:focus {
-            border-color: #667eea;
-            box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1);
+            border-color: #007cba;
+            box-shadow: 0 0 0 0.2rem rgba(0, 124, 186, 0.25);
+        }
+        
+        /* 指导语容器 */
+        .instruction-container {
+            max-width: 800px;
+            margin: 0 auto;
+            background-color: #ffffff;
+            padding: 40px;
+            border-radius: 15px;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+            border: 1px solid #e9ecef;
         }
         
         /* 指导语样式 */
         .instruction-text { 
             line-height: 1.8; 
-            margin: 30px auto; 
-            max-width: 900px; 
             font-size: 17px;
-            color: #4b5563;
+            color: #495057;
+            text-align: left;
         }
         
         .instruction-text p {
             margin-bottom: 12px;
         }
         
+        .instruction-text strong {
+            color: #007cba;
+        }
+        
         /* 标题样式 */
         h2 {
-            color: #1f2937;
+            color: #007cba;
             font-weight: 600;
             margin-bottom: 24px;
+            text-align: center;
         }
         
         /* 下载按钮样式 */
         #js-download-btn {
-            font-size: 18px; 
-            padding: 14px 40px; 
+            background-color: #007cba;
+            color: white;
+            padding: 15px 30px;
             border: none;
             border-radius: 8px;
-            background: linear-gradient(135deg, #10b981 0%, #059669 100%);
-            color: #ffffff;
-            cursor: pointer; 
-            font-weight: 600;
-            box-shadow: 0 4px 15px rgba(16, 185, 129, 0.4);
+            font-size: 16px;
+            font-weight: 500;
+            cursor: pointer;
+            margin: 10px;
             transition: all 0.3s ease;
+            box-shadow: 0 2px 10px rgba(0, 124, 186, 0.2);
+            min-width: 200px;
         }
         
         #js-download-btn:hover {
+            background-color: #005a87;
             transform: translateY(-2px);
-            box-shadow: 0 6px 20px rgba(16, 185, 129, 0.6);
+            box-shadow: 0 4px 15px rgba(0, 124, 186, 0.3);
         }
         
         #js-download-btn:active {
             transform: translateY(0);
+            box-shadow: 0 2px 10px rgba(0, 124, 186, 0.2);
         }
         
         /* 提示文本样式 */
         .jspsych-image-keyboard-response-prompt {
             margin-top: 20px;
             font-size: 16px;
-            color: #6b7280;
+            color: #6c757d;
             font-weight: 500;
+            text-align: center !important;
         }
         
-        /* 空格提示的美化 */
+        /* 空格键提示美化 */
         kbd {
             display: inline-block;
             padding: 3px 8px;
@@ -204,6 +250,30 @@
             border: 1px solid #d1d5db;
             border-radius: 4px;
             box-shadow: 0 1px 2px rgba(0,0,0,0.1);
+        }
+        
+        /* 欢迎页面容器 */
+        .welcome-container {
+            text-align: center;
+            padding: 50px;
+            background-color: #ffffff;
+            border-radius: 15px;
+            margin: 100px auto;
+            max-width: 600px;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+            border: 1px solid #e9ecef;
+        }
+        
+        .welcome-container h2 {
+            color: #28a745;
+            margin-bottom: 20px;
+            font-size: 28px;
+        }
+        
+        .welcome-container p {
+            color: #6c757d;
+            font-size: 16px;
+            margin-bottom: 20px;
         }
     </style>
 </head>
